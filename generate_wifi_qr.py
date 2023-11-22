@@ -4,6 +4,30 @@ from utils.cmd_color_codes import *
 from utils.wifi_info import get_wifi_list, get_wifi_password
 
 
+def get_qr(wifi_profile, wifi_password):
+    try:
+        print(f"\n{SUCCESS}{BOLD}Generating WIFI QR Code ...{END}")
+        # generate Qr code
+        qr_code = wifi_qrcode_generator.generator.wifi_qrcode(
+            ssid=wifi_profile,
+            hidden=False,
+            authentication_type="WPA",
+            password=wifi_password,
+        )
+        qr_code.print_ascii()
+        qr_code.make_image().save("wifi_qr.png")
+        print(f"{SUCCESS}WIFI Name: {END}", wifi_profile)
+        print(f"{SUCCESS}WIFI PASSWORD: {END}", wifi_password)
+
+        print(f"\n{SUCCESS}-------------------------")
+        print(f"[+] {BOLD}QR CODE GENERATED !!")
+        print(f"-------------------------{END}")
+    except Exception as e:
+        print(f"\n{FAILURE}-------------------------")
+        print(f"[+] {BOLD}QR GENERATION FAILED !!", e)
+        print(f"-------------------------{END}")
+
+
 def generate_qr_for_already_connected_network(wifi_profile):
     print(f"{SUCCESS}WIFI Name: {END}", wifi_profile)
     wifi_password = get_wifi_password(wifi_profile)
@@ -14,55 +38,13 @@ def generate_qr_for_already_connected_network(wifi_profile):
         wifi_password = input(
             f"{SUCCESS}{BOLD}Please enter a password for the WIFI - '{wifi_profile}' : {END}"
         )
-
-    try:
-        print(f"\n{SUCCESS}{BOLD}Generating WIFI QR Code ...{END}")
-        # generate Qr code
-        qr_code = wifi_qrcode_generator.generator.wifi_qrcode(
-            ssid=wifi_profile,
-            hidden=False,
-            authentication_type="WPA",
-            password=wifi_password,
-        )
-        qr_code.print_ascii()
-        qr_code.make_image().save("wifi_qr.png")
-        print(f"{SUCCESS}WIFI Name: {END}", wifi_profile)
-        print(f"{SUCCESS}WIFI PASSWORD: {END}", wifi_password)
-
-        print(f"\n{SUCCESS}-------------------------")
-        print(f"[+] {BOLD}QR CODE GENERATED !!")
-        print(f"-------------------------{END}")
-    except Exception as e:
-        print(f"\n{FAILURE}-------------------------")
-        print(f"[+] {BOLD}QR GENERATION FAILED !!")
-        print(f"-------------------------{END}")
+    get_qr(wifi_profile, wifi_password)
 
 
 def generate_qr_for_new_network():
     wifi_profile = input(f"{SUCCESS} Enter WIFI Name: {END}")
     wifi_password = input(f"{SUCCESS} Enter WIFI Password: {END}")
-
-    try:
-        print(f"\n{SUCCESS}{BOLD}Generating WIFI QR Code ...{END}")
-        # generate Qr code
-        qr_code = wifi_qrcode_generator.generator.wifi_qrcode(
-            ssid=wifi_profile,
-            hidden=False,
-            authentication_type="WPA",
-            password=wifi_password,
-        )
-        qr_code.print_ascii()
-        qr_code.make_image().save("wifi_qr.png")
-        print(f"{SUCCESS}WIFI Name: {END}", wifi_profile)
-        print(f"{SUCCESS}WIFI PASSWORD: {END}", wifi_password)
-
-        print(f"\n{SUCCESS}-------------------------")
-        print(f"[+] {BOLD}QR CODE GENERATED !!")
-        print(f"-------------------------{END}")
-    except Exception as e:
-        print(f"\n{FAILURE}-------------------------")
-        print(f"[+] {BOLD}QR GENERATION FAILED !!")
-        print(f"-------------------------{END}")
+    get_qr(wifi_profile, wifi_password)
 
 
 def main():
