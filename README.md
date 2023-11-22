@@ -14,6 +14,6 @@ pip install -r requirements.txt
 python generate_wifi_qr.py
 ```
 
-<img src='./assets/qr_generation.png' width=22%>
+<img src='./assets/qr_generation.png' width=40%>
 
 QR Image saved as : [wifi_qr.png](./wifi_qr.png)
