@@ -42,6 +42,7 @@ def generate_qr_for_already_connected_network(wifi_profile):
 
 
 def generate_qr_for_new_network():
+    print(f"\n{SUCCESS}Generate WIFI QR for new network ...{END}")
     wifi_profile = input(f"{SUCCESS} Enter WIFI Name: {END}")
     wifi_password = input(f"{SUCCESS} Enter WIFI Password: {END}")
     get_qr(wifi_profile, wifi_password)
@@ -55,12 +56,12 @@ def main():
 ============================={END}"""
     )
     wifi_list = get_wifi_list()
-    wifi_list.append("Generate QR for a new WIFI Network.")
 
     if len(wifi_list) != 0:
         print(f"\n{SUCCESS} Available WIFI:{END}")
         for i in range(len(wifi_list)):
             print(f"  {i+1} - {wifi_list[i]}")
+        wifi_list.append("Generate QR for a new WIFI Network.")
         user_input = int(
             input(f"\n{SUCCESS}Choose a WIFI network to genrate QR :{END} ")
         )
