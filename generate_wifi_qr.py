@@ -58,10 +58,10 @@ def main():
     wifi_list = get_wifi_list()
 
     if len(wifi_list) != 0:
+        wifi_list.append("Generate QR for a new WIFI Network.")
         print(f"\n{SUCCESS} Available WIFI:{END}")
         for i in range(len(wifi_list)):
             print(f"  {i+1} - {wifi_list[i]}")
-        wifi_list.append("Generate QR for a new WIFI Network.")
         user_input = int(
             input(f"\n{SUCCESS}Choose a WIFI network to genrate QR :{END} ")
         )
